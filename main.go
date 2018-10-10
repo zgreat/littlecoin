@@ -41,9 +41,9 @@ func processInput(cmd string) {
   case "mine":
     if mining {
       mining = false
-      fmt.Println("Stopping mining...")
+      fmt.Println("Mining stopped...")
     } else {
-      fmt.Println("Start mining, to stop, type this command once again")
+      fmt.Println("Mining started, to stop, type this command once again")
       mining = true
       go func() {
         Mine()
@@ -55,8 +55,8 @@ func processInput(cmd string) {
     spew.Dump(txsin)
   case "balance":
     confirmedBalance, unconfirmedBalance := getBalance()
-    fmt.Println("Your confirmed balance: ", confirmedBalance, " ultramegacoins")
-    fmt.Println("Your pending   balance:   ", unconfirmedBalance, " ultramegacoins")
+    fmt.Println("Confirmed balance: ", confirmedBalance)
+    fmt.Println("Pending balance: ", unconfirmedBalance)
   case "addbuddy":
     addBuddy()
   case "peers":
@@ -87,6 +87,8 @@ func main() {
   if err != nil {
     log.Fatal(err)
   }
+  
+  fmt.Println("EzBlock node started...")
 
   // Load blockchain.dat and awallet.dat
   loadFiles()
